@@ -17,6 +17,15 @@
   },
   "homepage": "https://github.com/sofienekhiari/baechli#readme",
   "devDependencies": {
+    "@types/node": "^14.14.36",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "eslint": "^7.22.0",
+    "eslint-config-google": "^0.14.0",
+    "prettier": "^2.2.1",
     "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "commander": "^7.2.0"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "name": "baechli",
+  "version": "0.0.0",
+  "description": "A command-line tool that watches a folder's structure and, on files' changes, run provided commands.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofienekhiari/baechli.git"
+  },
+  "author": "Sofiene Khiari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sofienekhiari/baechli/issues"
+  },
+  "homepage": "https://github.com/sofienekhiari/baechli#readme",
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  }
+}

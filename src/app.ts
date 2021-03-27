@@ -7,6 +7,7 @@ const {spawn} = require('child_process');
 import {Command, OptionValues} from 'commander';
 const chalk = require('chalk');
 const ora = require('ora');
+const chokidar = require('chokidar');
 
 /**
  * Process and execute the specified commands.
@@ -77,8 +78,16 @@ function run() {
   // Parse the command line arguments.
   program.parse(process.argv);
   const options = program.opts();
-  // Process and execute each command.
+  // Watch files and process and execute
+  // each command on change.
+  console.clear();
   processAndExecute(options);
+  chokidar.watch('.', {
+    ignored: ['.git', 'node_modules'],
+  }).on('change', () => {
+    console.clear();
+    processAndExecute(options);
+  });
 }
 
 

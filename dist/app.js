@@ -44,6 +44,7 @@ var spawn = require('child_process').spawn;
 var commander_1 = require("commander");
 var chalk = require('chalk');
 var ora = require('ora');
+var chokidar = require('chokidar');
 /**
  * Process and execute the specified commands.
  * @constructor
@@ -146,8 +147,16 @@ function run() {
     // Parse the command line arguments.
     program.parse(process.argv);
     var options = program.opts();
-    // Process and execute each command.
+    // Watch files and on change
+    // process and execute each command.
+    console.clear();
     processAndExecute(options);
+    chokidar.watch('.', {
+        ignored: ['.git', 'node_modules'],
+    }).on('change', function () {
+        console.clear();
+        processAndExecute(options);
+    });
 }
 // Run the main program.
 run();

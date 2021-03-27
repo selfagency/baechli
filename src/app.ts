@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // Import relevant modules.
 const {once} = require('events');
 const process = require('process');

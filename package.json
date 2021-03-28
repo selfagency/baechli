@@ -1,6 +1,6 @@
 {
   "name": "baechli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A command-line tool that watches a folder's structure and, on files' changes, run provided commands.",
   "main": "app.js",
   "bin": {
@@ -15,7 +15,29 @@
   },
   "author": "Sofiene Khiari",
   "license": "MIT",
-  "keywords": ["command-line", "tool", "cli", "watch", "folder", "files", "project", "run", "commands", "wait", "change", "save", "auto", "automatic", "binary", "app", "test", "testing", "format", "check", "lint"],
+  "keywords": [
+    "command-line",
+    "tool",
+    "cli",
+    "watch",
+    "folder",
+    "files",
+    "project",
+    "run",
+    "commands",
+    "wait",
+    "change",
+    "save",
+    "auto",
+    "automatic",
+    "binary",
+    "app",
+    "test",
+    "testing",
+    "format",
+    "check",
+    "lint"
+  ],
   "bugs": {
     "url": "https://github.com/sofienekhiari/baechli/issues"
   },

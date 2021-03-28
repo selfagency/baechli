@@ -8,6 +8,7 @@ import {Command, OptionValues} from 'commander';
 const chalk = require('chalk');
 const ora = require('ora');
 const chokidar = require('chokidar');
+const sleep = require('sleep');
 
 /**
  * Process and execute the specified commands.
@@ -48,7 +49,6 @@ async function processAndExecute(options: OptionValues) {
           infoSpinner.succeed();
         } else {
           infoSpinner.fail();
-          console.log('Getting output...');
           spawn(cmdProgram, cmdArgs, {stdio: 'inherit'});
           iterationError = true;
         }
@@ -80,13 +80,27 @@ function run() {
   const options = program.opts();
   // Watch files and process and execute
   // each command on change.
+  const waitSpinner = ora('Waiting for changes...');
+  waitSpinner.color = 'green';
+  waitSpinner.spinner = {
+    interval: 1000,
+    frames: ['●', '○'],
+  };
+  const watcher = chokidar.watch('.');
   console.clear();
-  processAndExecute(options);
-  chokidar.watch('.', {
-    ignored: ['.git', 'node_modules'],
-  }).on('change', () => {
+  waitSpinner.start();
+  watcher.on('change', async () => {
+    waitSpinner.stop();
     console.clear();
-    processAndExecute(options);
+    await watcher.unwatch('.');
+    await processAndExecute(options);
+    waitSpinner.color = 'yellow';
+    waitSpinner.text = 'Please wait...';
+    waitSpinner.start();
+    sleep.sleep(6);
+    watcher.add('.');
+    waitSpinner.color = 'green';
+    waitSpinner.text = 'Waiting for changes...';
   });
 }
 

@@ -45,6 +45,7 @@ var commander_1 = require("commander");
 var chalk = require('chalk');
 var ora = require('ora');
 var chokidar = require('chokidar');
+var sleep = require('sleep');
 /**
  * Process and execute the specified commands.
  * @constructor
@@ -89,7 +90,6 @@ function processAndExecute(options) {
                                             }
                                             else {
                                                 infoSpinner.fail();
-                                                console.log('Getting output...');
                                                 spawn(cmdProgram, cmdArgs, { stdio: 'inherit' });
                                                 iterationError = true;
                                             }
@@ -138,6 +138,7 @@ function processAndExecute(options) {
 }
 /** Main function */
 function run() {
+    var _this = this;
     // Create a new program handler.
     var program = new commander_1.Command();
     // Specify the current version.
@@ -147,16 +148,40 @@ function run() {
     // Parse the command line arguments.
     program.parse(process.argv);
     var options = program.opts();
-    // Watch files and on change
-    // process and execute each command.
+    // Watch files and process and execute
+    // each command on change.
+    var waitSpinner = ora('Waiting for changes...');
+    waitSpinner.color = 'green';
+    waitSpinner.spinner = {
+        interval: 1000,
+        frames: ['●', '○'],
+    };
+    var watcher = chokidar.watch('.');
     console.clear();
-    processAndExecute(options);
-    chokidar.watch('.', {
-        ignored: ['.git', 'node_modules'],
-    }).on('change', function () {
-        console.clear();
-        processAndExecute(options);
-    });
+    waitSpinner.start();
+    watcher.on('change', function () { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    waitSpinner.stop();
+                    console.clear();
+                    return [4 /*yield*/, watcher.unwatch('.')];
+                case 1:
+                    _a.sent();
+                    return [4 /*yield*/, processAndExecute(options)];
+                case 2:
+                    _a.sent();
+                    waitSpinner.color = 'yellow';
+                    waitSpinner.text = 'Please wait...';
+                    waitSpinner.start();
+                    sleep.sleep(6);
+                    watcher.add('.');
+                    waitSpinner.color = 'green';
+                    waitSpinner.text = 'Waiting for changes...';
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 }
 // Run the main program.
 run();

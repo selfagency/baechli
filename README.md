@@ -4,20 +4,20 @@
 
 ### Description
 
-A command-line tool that watches a folder's structure and, on files' changes, run provided commands.
+A command-line tool that watches a folder's structure and, on files' changes, run commands in the order they are provided.
 
 ![demo_animation](https://github.com/sofienekhiari/baechli/raw/main/demo/demo_animation.gif)
 
-### Instalation and usage
+### Installation and usage
 
-The app hasn't been published on npm yet, so the best way to get it is to follow these steps.
+The app can be found on [npm](https://www.npmjs.com/package/baechli) and can therefore be installed with the following methods.
 
 #### Global installation
 
 To install the app globally, run this command in your `terminal` app:
 
 ```bash
-npm install -g git+https://github.com/sofienekhiari/baechli.git
+npm install -g baechli
 ```
 
 Then, to run the app, execute the following command:
@@ -36,7 +36,7 @@ To install the app locally (only for your current project), follow these steps:
 - execute the following command in your terminal app.
 
 ```bash
-npm install --save-dev git+https://github.com/sofienekhiari/baechli.git
+npm install --save-dev baechli
 ```
 
 Then, to run the app, execute the following command:

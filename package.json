@@ -15,6 +15,7 @@
   },
   "author": "Sofiene Khiari",
   "license": "MIT",
+  "keywords": ["command-line", "tool", "cli", "watch", "folder", "files", "project", "run", "commands", "wait", "change", "save", "auto", "automatic", "binary", "app", "test", "testing", "format", "check", "lint"],
   "bugs": {
     "url": "https://github.com/sofienekhiari/baechli/issues"
   },

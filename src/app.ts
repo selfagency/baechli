@@ -72,7 +72,7 @@ function run() {
   // Create a new program handler.
   const program = new Command();
   // Specify the current version.
-  program.version('0.1.0');
+  program.version('0.1.3');
   // Specify the configuration for the "commands" flag.
   program.requiredOption('-c, --commands <cmd...>', 'Commands to run');
   // Parse the command line arguments.

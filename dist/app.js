@@ -105,7 +105,9 @@ function processAndExecute(options) {
                                 case 3:
                                     error_1 = _c.sent();
                                     return [3 /*break*/, 4];
-                                case 4:
+                                case 4: return [4 /*yield*/, Promise.all([childProcess])];
+                                case 5:
+                                    _c.sent();
                                     // Check if the program should be allowed
                                     // to proceed to the next iteration.
                                     if (iterationError) {
@@ -138,7 +140,6 @@ function processAndExecute(options) {
 }
 /** Main function */
 function run() {
-    var _this = this;
     // Create a new program handler.
     var program = new commander_1.Command();
     // Specify the current version.
@@ -159,29 +160,20 @@ function run() {
     var watcher = chokidar.watch('.');
     console.clear();
     waitSpinner.start();
-    watcher.on('change', function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    waitSpinner.stop();
-                    console.clear();
-                    return [4 /*yield*/, watcher.unwatch('.')];
-                case 1:
-                    _a.sent();
-                    return [4 /*yield*/, processAndExecute(options)];
-                case 2:
-                    _a.sent();
-                    waitSpinner.color = 'yellow';
-                    waitSpinner.text = 'Please wait...';
-                    waitSpinner.start();
-                    sleep.sleep(6);
-                    watcher.add('.');
-                    waitSpinner.color = 'green';
-                    waitSpinner.text = 'Waiting for changes...';
-                    return [2 /*return*/];
-            }
+    watcher.on('change', function () {
+        waitSpinner.stop();
+        console.clear();
+        var unwatchPromise = watcher.unwatch('.');
+        var processAndExecutePromise = processAndExecute(options);
+        Promise.all([unwatchPromise, processAndExecutePromise]).then(function () {
+            waitSpinner.color = 'yellow';
+            waitSpinner.start('Please wait...\n');
+            sleep.sleep(4);
+            watcher.add('.');
+            waitSpinner.color = 'green';
+            waitSpinner.text = 'Waiting for changes...';
         });
-    }); });
+    });
 }
 // Run the main program.
 run();

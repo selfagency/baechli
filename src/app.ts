@@ -58,6 +58,7 @@ async function processAndExecute(options: OptionValues) {
     try {
       await once(childProcess, 'exit');
     } catch (error) {}
+    await Promise.all([childProcess]);
     // Check if the program should be allowed
     // to proceed to the next iteration.
     if (iterationError) {
@@ -89,18 +90,19 @@ function run() {
   const watcher = chokidar.watch('.');
   console.clear();
   waitSpinner.start();
-  watcher.on('change', async () => {
+  watcher.on('change', () => {
     waitSpinner.stop();
     console.clear();
-    await watcher.unwatch('.');
-    await processAndExecute(options);
-    waitSpinner.color = 'yellow';
-    waitSpinner.text = 'Please wait...';
-    waitSpinner.start();
-    sleep.sleep(6);
-    watcher.add('.');
-    waitSpinner.color = 'green';
-    waitSpinner.text = 'Waiting for changes...';
+    const unwatchPromise = watcher.unwatch('.');
+    const processAndExecutePromise = processAndExecute(options);
+    Promise.all([unwatchPromise, processAndExecutePromise]).then(() => {
+      waitSpinner.color = 'yellow';
+      waitSpinner.start('Please wait...\n');
+      sleep.sleep(4);
+      watcher.add('.');
+      waitSpinner.color = 'green';
+      waitSpinner.text = 'Waiting for changes...';
+    });
   });
 }
 

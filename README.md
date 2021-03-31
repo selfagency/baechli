@@ -1,4 +1,5 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/sofienekhiari/baechli/blob/main/LICENSE)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sofienekhiari/baechli/eslint?label=eslint)](https://github.com/sofienekhiari/baechli/actions/workflows/eslint.yml)
 
 ## baechli
 

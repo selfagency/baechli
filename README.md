@@ -5,13 +5,15 @@
 
 ### Description
 
-A command-line tool that watches a folder's structure and, on files' changes, run commands in the order they are provided.
+A command-line tool that watches a folder's structure and, on files'
+changes, run commands in the order they are provided.
 
 ![demo_animation](https://github.com/sofienekhiari/baechli/raw/main/demo/demo_animation.gif)
 
 ### Installation and usage
 
-The app can be found on [npm](https://www.npmjs.com/package/baechli) and can therefore be installed with the following methods.
+The app can be found on [npm](https://www.npmjs.com/package/baechli) and
+can therefore be installed with the following methods.
 
 #### Global installation
 
@@ -47,3 +49,16 @@ npx baechli -c "command 1" "command 2" ...
 ```
 
 Please refer to the [description](#description) section for an example.
+
+### Contributing
+
+If you are interested in reporting/fixing issues and contributing
+directly to the code base, please see
+[CONTRIBUTING.md](https://github.com/sofienekhiari/baechli/blob/main/CONTRIBUTING.md)
+for more information on what we're looking for and how to get started.
+
+### Project's naming
+
+The name baechli (bächli | bɛːxli) in swiss german stands for `small
+river`, which is meant to symbolise for this project the continuous and
+unending flow of commands as part of small workflows.
